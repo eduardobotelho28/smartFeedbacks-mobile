@@ -33,19 +33,20 @@ public class HomeActivity extends AppCompatActivity {
         tvNps.setText("NPS Atual: 72");
         tvCsat.setText("CSAT Atual: 89%");
 
-        // Por enquanto só mocks de navegação futura
-        btnFeedbacks.setOnClickListener(v ->
-                tvWelcome.setText("Em breve: Tela de Feedbacks!")
-        );
+        btnFeedbacks.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, FeedbacksActivity.class);
+            startActivity(intent);
+        });
+
 
         btnPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, UserActivity.class);
             startActivity(intent);
         });
 
-
-        btnConfig.setOnClickListener(v ->
-                tvWelcome.setText("Em breve: Tela de Configurações!")
-        );
+        btnConfig.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ConfigActivity.class);
+            startActivity(intent);
+        });
     }
 }

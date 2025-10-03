@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Configurações"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="24dp" />
+
+    <CheckBox
+        android:id="@+id/cbVerNps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver NPS na Home"
+        android:checked="true"
+        android:textColor="#212121"
+        android:layout_marginBottom="12dp"/>
+
+    <CheckBox
+        android:id="@+id/cbVerCsat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver CSAT na Home"
+        android:checked="true"
+        android:textColor="#212121"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btnSalvarConfigs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:backgroundTint="#6200EE"
+        android:textColor="@android:color/white"
+        android:padding="12dp"/>
+</LinearLayout>
