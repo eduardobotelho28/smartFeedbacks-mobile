@@ -3,6 +3,7 @@ package com.example.smartfeedbacksmobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,19 +26,28 @@ public class HomeActivity extends AppCompatActivity {
         btnPerfil = findViewById(R.id.btnPerfil);
         btnConfig = findViewById(R.id.btnConfig);
 
-        // Pegando nome mockado passado pela Main
-        String nomeUsuario = getIntent().getStringExtra("nomeUsuario");
-        tvWelcome.setText("Bem-vindo, " + nomeUsuario + "!");
+        // ---------- PEGANDO OS DADOS DO SHARED ----------
+        SharedPreferences prefs = getSharedPreferences("SmartPrefs", MODE_PRIVATE);
 
-        // Mock de métricas
+        int userId = prefs.getInt("user_id", -1);
+        String token = prefs.getString("token", "Token não encontrado");
+
+        // Por enquanto exibimos só para debug:
+        tvWelcome.setText(
+                "User ID: " + userId + "\n" +
+                        "Token: " + token
+        );
+
+        // ---------- MOCK DAS MÉTRICAS ----------
         tvNps.setText("NPS Atual: 72");
         tvCsat.setText("CSAT Atual: 89%");
 
+
+        // ---------- NAVEGAÇÃO ----------
         btnFeedbacks.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, FeedbacksActivity.class);
             startActivity(intent);
         });
-
 
         btnPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, UserActivity.class);
