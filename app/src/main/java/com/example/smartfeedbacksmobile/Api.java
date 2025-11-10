@@ -19,5 +19,11 @@ public interface Api {
     Call<UserInfo> getUserInfo(@Header("Authorization") String token,
                                @retrofit2.http.Path("id") int userId);
 
+    @GET("userFeedbacks/{id}")
+    Call<FeedbackResponse> getUserFeedbacks(
+            @Header("Authorization") String token,
+            @retrofit2.http.Path("id") int userId
+    );
+
 
 }
