@@ -54,6 +54,22 @@
         android:layout_height="wrap_content"
         android:text="CSAT Atual: --"
         android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvStars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Avaliação (Stars): --"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvFormsCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Formulários Criados: --"
+        android:textSize="16sp"
         android:layout_marginBottom="32dp" />
 
     <!-- Botão Ver Feedbacks -->

@@ -14,4 +14,10 @@ public interface Api {
     @POST("login")
     Call<UserLogin> login(@Body UserLogin userLogin);
 
+    //USER INFO
+    @GET("user/info/{id}")
+    Call<UserInfo> getUserInfo(@Header("Authorization") String token,
+                               @retrofit2.http.Path("id") int userId);
+
+
 }
