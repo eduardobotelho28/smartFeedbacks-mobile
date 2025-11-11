@@ -25,6 +25,12 @@ public class UserLogin {
     @SerializedName("token")
     private String token;    // pode ser null
 
+    @SerializedName("lastname")
+    private String lastname;    // pode ser null
+
+    @SerializedName("firstname")
+    private String firstname;    // pode ser null
+
 
     // ---------- CONSTRUTOR PARA ENVIO ----------
     public UserLogin(String email, String password) {
@@ -48,6 +54,14 @@ public class UserLogin {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public Integer getUserId() {

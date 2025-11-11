@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     getSharedPreferences("SmartPrefs", MODE_PRIVATE)
                             .edit()
                             .putString("token", resp.getToken())
+                            .putString("email", resp.getEmail())
+                            .putString("firstname", resp.getFirstname())
+                            .putString("lastname", resp.getLastname())
                             .putInt("user_id",
                                     resp.getUserId() != null ? resp.getUserId() : -1)
                             .apply();
