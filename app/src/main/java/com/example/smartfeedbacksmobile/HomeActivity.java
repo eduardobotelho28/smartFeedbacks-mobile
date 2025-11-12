@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +46,14 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        // DEBUG TEMPORÁRIO
+        // Preferências de visualização
+        boolean verNps = prefs.getBoolean("verNps", true);
+        boolean verCsat = prefs.getBoolean("verCsat", true);
+
+        // Oculta se necessário
+        tvNps.setVisibility(verNps ? View.VISIBLE : View.GONE);
+        tvCsat.setVisibility(verCsat ? View.VISIBLE : View.GONE);
+
         tvWelcome.setText("Carregando dados...");
 
         // ============= CHAMADA REAL PARA A API =============
@@ -57,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserInfo>() {
             @Override
             public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-
                 if (!response.isSuccessful() || response.body() == null) {
                     Toast.makeText(HomeActivity.this,
                             "Erro ao carregar dados. Código: " + response.code(),
@@ -76,10 +82,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 // ============= SUCESSO =============
-                tvWelcome.setText("Usuário ID: " + user.getUserId());
+                tvWelcome.setText("Bem-vindo, usuário #" + user.getUserId());
 
-                tvNps.setText("NPS Atual: " + user.getNps());
-                tvCsat.setText("CSAT Atual: " + user.getCsat() + "%");
+                if (verNps) tvNps.setText("NPS Atual: " + user.getNps());
+                if (verCsat) tvCsat.setText("CSAT Atual: " + user.getCsat() + "%");
+
                 tvStars.setText("Avaliação (Stars): " + user.getStars() + " ★");
                 tvFormsCount.setText("Formulários Criados: " + user.getFormsCount());
             }
@@ -95,18 +102,26 @@ public class HomeActivity extends AppCompatActivity {
 
         // ---------- NAVEGAÇÃO ----------
         btnFeedbacks.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, FeedbacksActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(HomeActivity.this, FeedbacksActivity.class));
         });
 
         btnPerfil.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, UserActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(HomeActivity.this, UserActivity.class));
         });
 
         btnConfig.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, ConfigActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(HomeActivity.this, ConfigActivity.class));
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("SmartPrefs", MODE_PRIVATE);
+        boolean verNps = prefs.getBoolean("verNps", true);
+        boolean verCsat = prefs.getBoolean("verCsat", true);
+
+        tvNps.setVisibility(verNps ? View.VISIBLE : View.GONE);
+        tvCsat.setVisibility(verCsat ? View.VISIBLE : View.GONE);
     }
 }

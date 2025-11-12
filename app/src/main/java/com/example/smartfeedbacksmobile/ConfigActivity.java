@@ -1,6 +1,7 @@
 package com.example.smartfeedbacksmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,21 +21,25 @@ public class ConfigActivity extends AppCompatActivity {
         cbVerCsat = findViewById(R.id.cbVerCsat);
         btnSalvar = findViewById(R.id.btnSalvarConfigs);
 
-        // MOCK inicial: tudo marcado
-        cbVerNps.setChecked(true);
-        cbVerCsat.setChecked(true);
+        SharedPreferences prefs = getSharedPreferences("SmartPrefs", MODE_PRIVATE);
+
+        boolean verNps = prefs.getBoolean("verNps", true);
+        boolean verCsat = prefs.getBoolean("verCsat", true);
+
+        cbVerNps.setChecked(verNps);
+        cbVerCsat.setChecked(verCsat);
 
         btnSalvar.setOnClickListener(v -> {
-            boolean verNps = cbVerNps.isChecked();
-            boolean verCsat = cbVerCsat.isChecked();
+            boolean novoVerNps = cbVerNps.isChecked();
+            boolean novoVerCsat = cbVerCsat.isChecked();
 
-            // Aqui futuramente salvaremos em SharedPreferences ou via API
-            // Exemplo (SharedPreferences):
-            // SharedPreferences prefs = getSharedPreferences("configs", MODE_PRIVATE);
-            // prefs.edit().putBoolean("verNps", verNps).putBoolean("verCsat", verCsat).apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("verNps", novoVerNps);
+            editor.putBoolean("verCsat", novoVerCsat);
+            editor.apply();
 
-            Toast.makeText(this, "Preferências salvas (mock)", Toast.LENGTH_SHORT).show();
-            finish(); // fecha a tela após salvar
+            Toast.makeText(this, "Preferências salvas com sucesso!", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 }
