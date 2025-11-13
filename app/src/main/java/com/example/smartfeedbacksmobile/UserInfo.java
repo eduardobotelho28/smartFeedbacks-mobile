@@ -17,7 +17,7 @@ public class UserInfo {
     private int csat;
 
     @SerializedName("stars")
-    private int stars;
+    private float stars; // agora aceita valores decimais
 
     @SerializedName("forms_count")
     private int formsCount;
@@ -38,7 +38,7 @@ public class UserInfo {
         return csat;
     }
 
-    public int getStars() {
+    public float getStars() {
         return stars;
     }
 

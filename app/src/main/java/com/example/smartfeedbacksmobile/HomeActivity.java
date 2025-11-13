@@ -82,7 +82,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 // ============= SUCESSO =============
-                tvWelcome.setText("Bem-vindo, usuário #" + user.getUserId());
+                SharedPreferences prefs = getSharedPreferences("SmartPrefs", MODE_PRIVATE);
+                String usuarioNome = prefs.getString("firstname", "");
+                tvWelcome.setText("Bem-vindo, " + usuarioNome);
 
                 if (verNps) tvNps.setText("NPS Atual: " + user.getNps());
                 if (verCsat) tvCsat.setText("CSAT Atual: " + user.getCsat() + "%");
